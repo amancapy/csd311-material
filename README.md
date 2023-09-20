@@ -1,2 +1,2 @@
 # csd311-material
-material/misc useful stuff for CSD311
+code and snippets from Monday (25/09)'s python-for-AI tutorial - CSD311
