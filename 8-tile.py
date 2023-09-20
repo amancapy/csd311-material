@@ -11,7 +11,7 @@ while inversions % 2 != 0:
     inversions = sum([len([start_state[j] > start_state[i] for i in range(len(start_state)) for j in range(i, len(start_state)) if start_state[j] > start_state[i] and start_state[i] != 0])])
 
 h1 = lambda x: len([i == j for i, j in zip(x[0], [1, 2, 3, 4, 5, 6, 7, 8, 0]) if i == j]) # num_tiles out of place
-h2 = lambda x:  -sum([abs(((x[0][i] - 1) % 9 - ((x[0][i] - 1) % 9) % 3) / 3 - (i - i % 3) / 3) + abs(((x[0][i] - 1) % 9) % 3 - i % 3) for i in range(9)]) # manhattan
+h2 = lambda x: -sum([abs(((x[0][i] - 1) % 9 - ((x[0][i] - 1) % 9) % 3) / 3 - (i - i % 3) / 3) + abs(((x[0][i] - 1) % 9) % 3 - i % 3) for i in range(9)]) # manhattan
 key = h2 # choice of heuristic function h1, h2
 
 # a_star = heuristic * inadmissibility_factor + route_length
