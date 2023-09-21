@@ -22,7 +22,7 @@ cats_kitten.parent.cuteness += 900_000
 
 a_bunch_of_cats = [Cat("tabby", random.randint(3, 15), random.randint(10000, 1000000000), parent=None) for _ in range(100)]
 a_bunch_of_cats.sort()
-print(a_bunch_of_cats) # [<__main__.Cat object at 0x7efdb6004910>, <__main__.Cat object at 0x7efdb60051d0>, <__main__.Cat object at 0x7ef .... ]
+print(a_bunch_of_cats) # [<__main__.Cat object at 0x7efdb6004910>, <__main__.Cat object at 0x7efdb60051d0>, <__main__.Cat object at 0x7ef ... ]
 
 # what
 
@@ -31,10 +31,10 @@ print(a_bunch_of_cats) # [<__main__.Cat object at 0x7efdb6004910>, <__main__.Cat
 class Cat:
     ...
     def __repr__(self):
-        return f"({self.age}, {self.cuteness})"
+        return f"({self.breed}, {self.age}, {self.cuteness})"
 """
 
-print(a_bunch_of_cats) # [3, 928310486, 3, 669073172, 3, 201969569, 3, 939196711, 3, 617045230, 3, 235358942, 3, 500763847, 3, 215745443, 4, 8474 ... ]
+print(a_bunch_of_cats) # [("tabby", 3, 928310486), ("tabby", 3, 669073172), ("tabby", 3, 201969569), ("tabby", 3, 939196711), ("tabby", 3, 617045230), ("tabby", 3, 235358942), ("tabby", 3, 500763847), ("tabby", 3, 215745443), (4, 8474..) ... ]
 
 
 def pet_cat(cat):
