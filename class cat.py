@@ -13,9 +13,6 @@ class Cat:
     def __gt__(self, other):
         return self.age > other.age
     
-    def __repr__(self):
-        return f"{self.age}, {self.cuteness}"
-
 
 cat = Cat("tabby", 5, 100_000)
 cats_kitten = Cat("orange tabby", 1, 1000_000, parent=cat)
@@ -34,7 +31,7 @@ print(a_bunch_of_cats) # [<__main__.Cat object at 0x7efdb6004910>, <__main__.Cat
 class Cat:
     ...
     def __repr__(self):
-        return f"{self.age}, {self.cuteness}"
+        return f"({self.age}, {self.cuteness})"
 """
 
 print(a_bunch_of_cats) # [3, 928310486, 3, 669073172, 3, 201969569, 3, 939196711, 3, 617045230, 3, 235358942, 3, 500763847, 3, 215745443, 4, 8474 ... ]
