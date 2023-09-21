@@ -29,8 +29,8 @@ for _ in range(100):
         curr_state = queue.pop()
         visited[tuple(curr_state[0])] = curr_state[1] # lists are not hashable, but tuples are.
 
+        curr_zero_idx = curr_state[0].index(0) # find index of 0
         for drn in ("U", "D", "L", "R"):
-            curr_zero_idx = curr_state[0].index(0) # find index of 0
             if (curr_zero_idx % 3 == 0 and drn == "L") or ((curr_zero_idx + 1) % 3 == 0 and drn == "R"): # can't left or right when at border. the U/D doesn't need to be edge-cased
                 continue
             new_zero_idx = curr_zero_idx + action_index_change[drn]
