@@ -5,26 +5,31 @@ action_index_change = {"U": -3, "D": +3, "L": -1, "R": +1}
 oppossite_actions = {"U": "D", "D": "U", "L": "R", "R": "L", "S": None}
 start_state = [1, 2, 3, 4, 5, 6, 7, 8, 0] # before shuffling
 
-for _ in range(100):
+    
+h1 = lambda x: len([i == j for i, j in zip(x[0], [1, 2, 3, 4, 5, 6, 7, 8, 0]) if i == j]) # num_tiles out of place
+h2 = lambda x: -sum([abs(((x[0][i] - 1) % 9 - ((x[0][i] - 1) % 9) % 3) / 3 - (i - i % 3) / 3) + abs(((x[0][i] - 1) % 9) % 3 - i % 3) for i in range(9)]) / 2 # manhattan
+pick = h2
+
+# a_star = heuristic * inadmissibility_factor + route_length
+a_star = lambda x: pick(x) * 100 - len(x[1])
+
+
+for i in range(1000):
     # inversion parity test for whether random state is solvable.
     inversions = 1
     while inversions % 2 != 0:
         random.shuffle(start_state)
         inversions = sum([len([start_state[j] > start_state[i] for i in range(len(start_state)) for j in range(i, len(start_state)) if start_state[j] > start_state[i] and start_state[i] != 0])])
 
-    h1 = lambda x: len([i == j for i, j in zip(x[0], [1, 2, 3, 4, 5, 6, 7, 8, 0]) if i == j]) # num_tiles out of place
-    h2 = lambda x: -sum([abs(((x[0][i] - 1) % 9 - ((x[0][i] - 1) % 9) % 3) / 3 - (i - i % 3) / 3) + abs(((x[0][i] - 1) % 9) % 3 - i % 3) for i in range(9)]) / 2 # manhattan
-    key = h2 # choice of heuristic function h1, h2
+    print(i, start_state, end=" ")
 
-    # a_star = heuristic * inadmissibility_factor + route_length
-    a_star = lambda x: key(x) * 250 - len(x[1])
 
     queue = [(start_state, "S")] # "S" => starting
     visited = {} # remember hashing?
 
     while queue: # while queue is not empty
-        if len(queue) % 10 == 0: # it's faster this way but suboptimal technically
-            queue = sorted(queue, key=a_star)
+        if len(queue) % 10 == 0:
+            queue.sort(key=a_star)
         # print(len(visited), a_star(queue[-1]))
 
         curr_state = queue.pop()
@@ -44,7 +49,7 @@ for _ in range(100):
                     queue.append((temp_state, curr_state[1] + drn))
                 
                 if temp_state == [1, 2, 3, 4, 5, 6, 7, 8, 0]:
-                    print(start_state, (curr_state[1] + drn)[:0], len(curr_state[1]), len(visited))
+                    print(curr_state[1] + drn[1:], len(curr_state[1]), len(visited))
                     queue = []
                     break
                     
