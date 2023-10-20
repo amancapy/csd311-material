@@ -1,2 +1,2 @@
 # csd311-material
-code and snippets from Monday (25/09)'s python-for-AI tutorial - CSD311
+CSD311 (2023) Material and Code
